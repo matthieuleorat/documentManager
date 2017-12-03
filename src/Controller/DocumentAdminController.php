@@ -20,6 +20,6 @@ class DocumentAdminController extends AdminController
         /** @var Document $entity */
         $entity = $easyadmin['item'];
 
-        return $this->file($entity->getFile());
+        return $this->file($entity->getFile(), $entity->getName());
     }
 }
