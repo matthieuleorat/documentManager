@@ -1,0 +1,27 @@
+easy_admin:
+    entities:
+        Document:
+            class: App\Entity\Document
+            controller: App\Controller\DocumentAdminController
+            list:
+                actions: ['edit', 'download', 'delete']
+                fields:
+                    - id
+                    - name
+            form:
+                fields:
+                    - name
+                    - tags
+                    - file
+                    - description
+#        User:
+#            class: App\Entity\User
+        Tag:
+            class: App\Entity\Tag
+            list:
+                fields:
+                    - id
+                    - name
+            form:
+                fields:
+                    - name

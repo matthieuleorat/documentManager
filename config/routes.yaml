@@ -1,0 +1,36 @@
+index:
+    path: /
+    defaults: { _controller: 'App\Controller\DefaultController::number' }
+
+test:
+    path: /test
+    defaults: { _controller: 'App\Controller\DefaultController::test' }
+
+easy_admin_bundle:
+    resource: "Controller/AdminController.php"
+    prefix: /admin
+    type: annotation
+
+# Security
+login:
+    path: /login
+    defaults: { _controller: 'App\Controller\Security\SecurityController::login' }
+logout:
+    path: /logout
+
+# Resetting
+request_password:
+    path: /resetting/request-password
+    defaults: { _controller: 'App\Controller\Security\ResettingController::requestPassword' }
+
+send_email:
+    path: /resetting/send-email
+    defaults: { _controller: 'App\Controller\Security\ResettingController::sendEmail' }
+
+check_email:
+    path: /resetting/check-email
+    defaults: { _controller: 'App\Controller\Security\ResettingController::checkEmail' }
+
+reset_email:
+    path: /resetting/reset/{token}
+    defaults: { _controller: 'App\Controller\Security\ResettingController::reset' }

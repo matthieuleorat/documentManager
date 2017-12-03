@@ -1,0 +1,35 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        our_db_provider: # Arbitrary name
+            entity:
+                class: App\Entity\User
+                property: username
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern:    ^/
+            provider: our_db_provider # Use any declared provider above
+            form_login:
+                login_path: login
+                check_path: login
+                default_target_path: /
+            anonymous: true
+            logout:
+                path:   /logout
+                target: /
+            remember_me:
+                secret:   '%env(APP_SECRET)%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }

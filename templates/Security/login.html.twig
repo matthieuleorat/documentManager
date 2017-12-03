@@ -1,0 +1,29 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password" />
+
+        <input type="checkbox" id="remember_me" name="_remember_me" checked />
+        <label for="remember_me">Keep me logged in</label>
+
+        <button type="submit">login</button>
+    </form>
+    <a href="{{ path('request_password') }}">Forgot password</a>
+    <ul>
+        <li>add month & year in document directory structure</li>
+        <li>thumbnail quality</li>
+        <li>FTP Listener</li>
+        <li>Select multiple document, and send them in a zip by email</li>
+        <li>Document sharing</li>
+        <li>Popin preview</li>
+    </ul>
+{% endblock %}
