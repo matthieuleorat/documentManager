@@ -8,6 +8,7 @@ easy_admin:
                 fields:
                     - id
                     - name
+                    - {property: 'thumbnail', type: 'image'}
             form:
                 fields:
                     - name

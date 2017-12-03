@@ -25,7 +25,7 @@ class PdfThumbnailGenerator
 
         if (extension_loaded('imagick')) {
 
-            $i = new \Imagick($path.$fileName);
+            $i = new \Imagick($path.$fileName. "[0]");
             //set new format
             $i->setImageFormat('jpg');
             $i->setCompression(\Imagick::COMPRESSION_JPEG);
