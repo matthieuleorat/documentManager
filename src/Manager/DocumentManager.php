@@ -42,7 +42,7 @@ class DocumentManager
     {
         $this->thumbnailGenerator = $thumbnailGenerator;
         $this->fileManager = $fileManager;
-        $this->project_dir = $project_dir;
+        $this->project_dir = $project_dir.'/public';
         $this->document_directory = $document_directory;
     }
 

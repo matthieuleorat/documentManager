@@ -2,7 +2,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'fr'
-    document_directory: '/public/uploads/document'
+    document_directory: '/uploads/document'
 
 services:
     # default configuration for services in *this* file
@@ -30,10 +30,13 @@ services:
         tags: ['controller.service_arguments']
 
     App\Manager\DocumentManager:
-        arguments: [ '@App\Util\FileManager' ,"%kernel.project_dir%", "%document_directory%", '@App\Util\PdfThumbnailGenerator' ]
+        arguments:
+            - '@App\Util\FileManager'
+            - '%kernel.project_dir%'
+            - '%document_directory%'
+            - '@App\Util\PdfThumbnailGenerator'
 
     App\Listener\Doctrine\DoctrineDocumentSubscriber:
         arguments: [ "%kernel.project_dir%", '@App\Manager\DocumentManager' ]
-#        arguments: [ "@App\Util\PdfThumbnailGenerator", "%kernel.project_dir%", '@App\Manager\DocumentManager' ]
         tags:
             - { name: doctrine.event_subscriber }

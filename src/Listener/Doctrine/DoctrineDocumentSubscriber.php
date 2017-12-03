@@ -27,7 +27,7 @@ class DoctrineDocumentSubscriber implements EventSubscriber
 
     public function __construct($project_dir, DocumentManager $documentManager)
     {
-        $this->project_dir = $project_dir;
+        $this->project_dir = $project_dir.'/public';
         $this->documentManager = $documentManager;
     }
 
