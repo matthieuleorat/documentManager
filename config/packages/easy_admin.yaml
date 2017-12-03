@@ -6,9 +6,10 @@ easy_admin:
             list:
                 actions: ['edit', 'download', 'delete']
                 fields:
-                    - id
+                    - { property: 'thumbnail', type: 'image' }
                     - name
-                    - {property: 'thumbnail', type: 'image'}
+                    - { property: 'createdAt', format: 'd/m/Y h:i:s' }
+                    - { property: 'updatedAt', format: 'd/m/Y h:i:s' }
             form:
                 fields:
                     - name

@@ -8,19 +8,21 @@
 
 namespace App\Entity;
 
-use App\Behavior\Userable;
-use App\Behavior\UserableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Behavior\Timestampable;
+use App\Behavior\Userable;
+use App\Behavior\UserableInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="document")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Document implements UserableInterface
 {
-    use Userable;
+    use Userable, Timestampable;
 
     /**
      * @ORM\Column(type="integer")
