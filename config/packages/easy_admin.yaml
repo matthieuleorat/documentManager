@@ -1,4 +1,5 @@
 easy_admin:
+    site_name: 'Document Manager'
     entities:
         Document:
             class: App\Entity\Document
