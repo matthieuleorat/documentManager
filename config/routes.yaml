@@ -1,14 +1,6 @@
-index:
-    path: /
-    defaults: { _controller: 'App\Controller\DefaultController::number' }
-
-test:
-    path: /test
-    defaults: { _controller: 'App\Controller\DefaultController::test' }
-
 easy_admin_bundle:
     resource: "Controller/AdminController.php"
-    prefix: /admin
+    prefix: /
     type: annotation
 
 # Security
