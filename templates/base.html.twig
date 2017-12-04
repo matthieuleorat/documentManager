@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="/stylesheet/styles.css">
+        {% include('/fragments/favicons.html.twig') %}
     </head>
     <body>
         {% block body %}{% endblock %}
