@@ -10,6 +10,7 @@ namespace App\Behavior;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Trait Userable

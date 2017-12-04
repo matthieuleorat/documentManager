@@ -8,6 +8,8 @@
 
 namespace App\Behavior;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Trait Timestampable
  * @package App\Behavior
