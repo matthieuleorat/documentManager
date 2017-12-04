@@ -9,7 +9,7 @@
 namespace App\Controller\Security;
 
 use App\Entity\User;
-use App\Form\Security\ResetPasswordType;
+use App\Form\Type\Security\ResetPasswordType;
 use App\Manager\UserManager;
 use App\Util\Mailer;
 use App\Util\TokenGenerator;
