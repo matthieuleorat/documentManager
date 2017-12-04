@@ -20,7 +20,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ResettingController extends Controller
 {
-    // TODO Put this somewhere else
     private $ttl = 1114400; // 310 heures
 
     /**
