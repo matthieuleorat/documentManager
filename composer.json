@@ -1,8 +1,8 @@
 {
     "name": "symfony/skeleton",
     "type": "project",
-    "license": "proprietary",
-    "description": "Project description",
+    "license": "MIT",
+    "description": "A document manager to store and sort documents",
     "minimum-stability": "beta",
     "require": {
         "php": "^7.1.3",
