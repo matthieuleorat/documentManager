@@ -133,7 +133,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getIsActive()
+    public function isActive()
     {
         return $this->isActive;
     }
@@ -142,7 +142,7 @@ class User implements AdvancedUserInterface, \Serializable
      * @param mixed $isActive
      * @return User
      */
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
         $this->isActive = $isActive;
         return $this;
