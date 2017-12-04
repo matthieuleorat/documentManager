@@ -19,15 +19,11 @@ use Doctrine\Common\EventSubscriber;
 
 class DoctrineDocumentSubscriber implements EventSubscriber
 {
-    /** @var  string */
-    private $project_dir;
-
     /** @var DocumentManager  */
     private $documentManager;
 
-    public function __construct($project_dir, DocumentManager $documentManager)
+    public function __construct(DocumentManager $documentManager)
     {
-        $this->project_dir = $project_dir.'/public';
         $this->documentManager = $documentManager;
     }
 

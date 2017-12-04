@@ -14,7 +14,6 @@ class DocumentAdminController extends AdminController
 {
     public function downloadDocumentAction()
     {
-        $id = $this->request->query->get('id');
         $easyadmin = $this->request->attributes->get('easyadmin');
 
         /** @var Document $entity */

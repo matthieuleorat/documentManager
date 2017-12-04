@@ -37,6 +37,6 @@ services:
             - '@App\Util\PdfThumbnailGenerator'
 
     App\Listener\Doctrine\DoctrineDocumentSubscriber:
-        arguments: [ "%kernel.project_dir%", '@App\Manager\DocumentManager' ]
+        arguments: [ '@App\Manager\DocumentManager' ]
         tags:
             - { name: doctrine.event_subscriber }

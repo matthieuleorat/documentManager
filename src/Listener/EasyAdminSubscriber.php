@@ -32,18 +32,12 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     {
         return array(
             'easy_admin.pre_persist'    => ['prePersist'],
-            'easy_admin.pre_update'     => ['preUpdate'],
         );
     }
 
     public function prePersist(GenericEvent $event)
     {
         $this->setUser($event->getSubject());
-    }
-
-    public function preUpdate(GenericEvent $event)
-    {
-        //$this->setUser($event->getSubject());
     }
 
     /**
