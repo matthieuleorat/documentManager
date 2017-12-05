@@ -25,7 +25,43 @@ class DocumentAdminController extends AdminController
         /** @var Document $entity */
         $entity = $easyadmin['item'];
 
+        $this->denyAccessUnlessGranted('download', $entity);
+
         return $this->file($entity->getFile(), $entity->getName());
+    }
+
+    protected function editAction()
+    {
+        $easyadmin = $this->request->attributes->get('easyadmin');
+        $entity = $easyadmin['item'];
+
+        $this->denyAccessUnlessGranted('edit', $entity);
+
+        return parent::editAction();
+    }
+
+    protected function showAction()
+    {
+        $easyadmin = $this->request->attributes->get('easyadmin');
+
+        /** @var Document $entity */
+        $entity = $easyadmin['item'];
+
+        $this->denyAccessUnlessGranted('show', $entity);
+
+        return parent::showAction();
+    }
+
+    protected function deleteAction()
+    {
+        $easyadmin = $this->request->attributes->get('easyadmin');
+
+        /** @var Document $entity */
+        $entity = $easyadmin['item'];
+
+        $this->denyAccessUnlessGranted('delete', $entity);
+
+        return parent::deleteAction();
     }
 
     /**
