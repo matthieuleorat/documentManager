@@ -15,6 +15,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class DocumentAdminController extends AdminController
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function downloadDocumentAction()
     {
         $easyadmin = $this->request->attributes->get('easyadmin');
@@ -25,7 +28,16 @@ class DocumentAdminController extends AdminController
         return $this->file($entity->getFile(), $entity->getName());
     }
 
-    public function createDocumentEntityFormBuilder($entity, $view)
+    /**
+     * Return a form builder for document creation & edition
+     * - Filter tag list by user
+     *
+     * @param $entity
+     * @param $view
+     *
+     * @return \Symfony\Component\Form\FormBuilder
+     */
+    protected function createDocumentEntityFormBuilder($entity, $view)
     {
         /** @var User $user */
         $user = $this->getUser();
