@@ -39,7 +39,7 @@ class DocumentAdminController extends AdminController
         $tagsOptions['query_builder'] = function (EntityRepository $er) use ($user) {
             return $er->createQueryBuilder('t')
                 ->where('t.user = :user')
-                ->setParameter('user', 1);
+                ->setParameter('user', $user);
         };
 
         // Reset choice_list and choice_loader
