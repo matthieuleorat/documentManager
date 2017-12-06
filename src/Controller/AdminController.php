@@ -67,7 +67,12 @@ class AdminController extends BaseAdminController
         return parent::deleteAction();
     }
 
-
+    /**
+     * Override findAll method to automatically filter userable entities by connected user
+     * Used on listAction
+     *
+     * @inheritdoc
+     */
     protected function findAll($entityClass, $page = 1, $maxPerPage = 15, $sortField = null, $sortDirection = null, $dqlFilter = null)
     {
         $dqlFilter = $this->userDqlFilter($entityClass, $dqlFilter);
@@ -75,6 +80,35 @@ class AdminController extends BaseAdminController
         return parent::findAll($entityClass, $page, $maxPerPage, $sortField, $sortDirection, $dqlFilter);
     }
 
+    /**
+     * Override findBy method to automatically filter userable entities by connected user
+     * Used on SearchAction
+     *
+     * @inheritdoc
+     */
+    protected function findBy(
+        $entityClass,
+        $searchQuery,
+        array $searchableFields,
+        $page = 1,
+        $maxPerPage = 15,
+        $sortField = null,
+        $sortDirection = null,
+        $dqlFilter = null
+    ) {
+        $dqlFilter = $this->userDqlFilter($entityClass, $dqlFilter);
+
+        return parent::findBy($entityClass, $searchQuery, $searchableFields, $page, $maxPerPage, $sortField,
+            $sortDirection, $dqlFilter); //
+    }
+
+    /**
+     * If given class is UserAble, then add a condition on the query to filter by user
+     *
+     * @param $entityClass
+     * @param null $dqlFilter
+     * @return null|string
+     */
     private function userDqlFilter($entityClass, $dqlFilter = null)
     {
         $entityObject = new $entityClass();
