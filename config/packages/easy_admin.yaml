@@ -17,10 +17,9 @@ easy_admin:
                     - tags
                     - file
                     - description
-#        User:
-#            class: App\Entity\User
         Tag:
             class: App\Entity\Tag
+            controller: App\Controller\TagAdminController
             list:
                 fields:
                     - id
