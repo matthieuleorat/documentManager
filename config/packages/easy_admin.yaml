@@ -19,7 +19,6 @@ easy_admin:
                     - description
         Tag:
             class: App\Entity\Tag
-            controller: App\Controller\TagAdminController
             list:
                 fields:
                     - id
