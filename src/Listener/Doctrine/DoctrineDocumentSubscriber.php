@@ -14,6 +14,7 @@ use App\Util\PdfThumbnailGenerator;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\EventSubscriber;
 
@@ -22,9 +23,13 @@ class DoctrineDocumentSubscriber implements EventSubscriber
     /** @var DocumentManager  */
     private $documentManager;
 
-    public function __construct(DocumentManager $documentManager)
+    /** @var LoggerInterface  */
+    private $logger;
+
+    public function __construct(DocumentManager $documentManager, LoggerInterface $logger)
     {
         $this->documentManager = $documentManager;
+        $this->logger = $logger;
     }
 
     public function getSubscribedEvents()
@@ -32,8 +37,11 @@ class DoctrineDocumentSubscriber implements EventSubscriber
         return array(
             'postLoad',
             'prePersist',
+            'postPersist',
             'preUpdate',
-            'preRemove'
+            'postUpdate',
+            'preRemove',
+            'postRemove',
         );
     }
 
@@ -51,6 +59,13 @@ class DoctrineDocumentSubscriber implements EventSubscriber
 
         // Upload Document File
         $this->documentManager->uploadDocumentFile($document);
+    }
+
+    public function postPersist(LifecycleEventArgs $args)
+    {
+        /** @var Document $document */
+        $document = $args->getEntity();
+        $this->logger->info('create', ['document' => $document->getId(), 'user' => $document->getUser()->getId()]);
     }
 
     /**
@@ -74,6 +89,13 @@ class DoctrineDocumentSubscriber implements EventSubscriber
         $this->documentManager->uploadDocumentFile($document);
     }
 
+    public function postUpdate(LifecycleEventArgs $args)
+    {
+        /** @var Document $document */
+        $document = $args->getEntity();
+        $this->logger->info('edit', ['document' => $document->getId(), 'user' => $document->getUser()->getId()]);
+    }
+
     /**
      * On preRemove, delete document file from server
      *
@@ -86,8 +108,18 @@ class DoctrineDocumentSubscriber implements EventSubscriber
             return;
         }
 
+        // Store id in a new attribute, because id is not defined in postRemove
+        $document->oldId = $document->getId();
+
         // Delete Document
         $this->documentManager->deleteDocumentFile($document);
+    }
+
+    public function postRemove(LifecycleEventArgs $args)
+    {
+        /** @var Document $document */
+        $document = $args->getEntity();
+        $this->logger->info('remove', ['document' => $document->oldId, 'user' => $document->getUser()->getId()]);
     }
 
     /**

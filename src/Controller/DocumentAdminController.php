@@ -8,14 +8,19 @@
 
 namespace App\Controller;
 
+use App\DocumentEvents;
 use App\Entity\Document;
 use App\Entity\User;
+use App\Event\DocumentDownloadEvent;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class DocumentAdminController extends AdminController
 {
     /**
+     * Return a document
+     *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function downloadDocumentAction()
@@ -25,8 +30,14 @@ class DocumentAdminController extends AdminController
         /** @var Document $entity */
         $entity = $easyadmin['item'];
 
+        // Check if user is authirized to downaload this document
         $this->denyAccessUnlessGranted('download', $entity);
 
+        // Dispatch DocumentDownloadEvent
+        $event = new DocumentDownloadEvent($entity);
+        $this->get('event_dispatcher')->dispatch(DocumentEvents::DOCUMENT_DOWNLOAD, $event);
+
+        // Return file
         return $this->file($entity->getFile(), $entity->getName());
     }
 

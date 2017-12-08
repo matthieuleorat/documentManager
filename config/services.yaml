@@ -37,6 +37,11 @@ services:
             - '@App\Util\PdfThumbnailGenerator'
 
     App\Listener\Doctrine\DoctrineDocumentSubscriber:
-        arguments: [ '@App\Manager\DocumentManager' ]
+        arguments: [ '@App\Manager\DocumentManager', '@monolog.logger.document' ]
         tags:
             - { name: doctrine.event_subscriber }
+
+    App\Listener\DocumentSubscriber:
+        arguments: [ '@monolog.logger.document' ]
+        tags:
+            - { name: kernel.event_subscriber }
