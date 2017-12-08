@@ -10,12 +10,9 @@ namespace App\Listener\Doctrine;
 
 use App\Entity\Document;
 use App\Manager\DocumentManager;
-use App\Util\PdfThumbnailGenerator;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\EventSubscriber;
 
 class DoctrineDocumentSubscriber implements EventSubscriber

@@ -14,7 +14,6 @@ use App\Entity\User;
 use App\Event\DocumentDownloadEvent;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class DocumentAdminController extends AdminController
 {
