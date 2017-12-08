@@ -43,7 +43,7 @@ class DocumentSubscriber implements EventSubscriberInterface
      * @param DocumentDownloadEvent $event
      */
     public function onDocumentDownload(DocumentDownloadEvent $event)
-    {die(dump($event));
+    {
         /** @var Document $document */
         $document = $event->getDocument();
         $this->logger->info('download', ['document' => $document->getId(), 'user' => $document->getUser()->getId()]);

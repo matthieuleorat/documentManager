@@ -30,7 +30,7 @@ class DocumentDownloadEvent extends Event
      */
     public function getDocument()
     {
-        return $this->getDocument();
+        return $this->document;
     }
 
     /**
