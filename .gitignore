@@ -5,9 +5,9 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-/public/uploads/
-
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+/report/
+/public/uploads/

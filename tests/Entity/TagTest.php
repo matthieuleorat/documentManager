@@ -33,6 +33,14 @@ class TagTest extends TestCase
         $this->assertEquals($name, $tag->getName());
     }
 
+    public function testToString()
+    {
+        $name = "Tag Name";
+        $tag = $this->getTag();
+        $tag->setName($name);
+        $this->assertEquals($name, $tag);
+    }
+
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|Tag
      */
