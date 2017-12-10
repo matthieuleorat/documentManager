@@ -87,7 +87,7 @@ class User implements AdvancedUserInterface, \Serializable
         return null;
     }
 
-    public function setSalt($salt)
+    public function setSalt()
     {
         return null;
     }

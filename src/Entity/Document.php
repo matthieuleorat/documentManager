@@ -74,6 +74,11 @@ class Document implements UserableInterface
     private $thumbnail;
 
     /**
+     * @var integer
+     */
+    private $oldId;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -120,7 +125,7 @@ class Document implements UserableInterface
     }
 
     /**
-     * @param Tag[] $tags
+     * @param Tag[]|ArrayCollection $tags
      *
      * @return $this
      */
@@ -225,4 +230,22 @@ class Document implements UserableInterface
         $this->thumbnail = $thumbnail;
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getOldId()
+    {
+        return $this->oldId;
+    }
+
+    /**
+     * @return Document
+     */
+    public function setOldId()
+    {
+        $this->oldId = $this->id;
+        return $this;
+    }
+
 }

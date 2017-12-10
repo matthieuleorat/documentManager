@@ -106,7 +106,7 @@ class AdminController extends BaseAdminController
      * If given class is UserAble, then add a condition on the query to filter by user
      *
      * @param $entityClass
-     * @param null $dqlFilter
+     * @param null|string $dqlFilter
      * @return null|string
      */
     private function userDqlFilter($entityClass, $dqlFilter = null)

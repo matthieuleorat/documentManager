@@ -106,7 +106,7 @@ class DoctrineDocumentSubscriber implements EventSubscriber
         }
 
         // Store id in a new attribute, because id is not defined in postRemove
-        $document->oldId = $document->getId();
+        //$document->setOldId($document->getId());
 
         // Delete Document
         $this->documentManager->deleteDocumentFile($document);
@@ -116,7 +116,7 @@ class DoctrineDocumentSubscriber implements EventSubscriber
     {
         /** @var Document $document */
         $document = $args->getEntity();
-        $this->logger->info('remove', ['document' => $document->oldId, 'user' => $document->getUser()->getId()]);
+        $this->logger->info('remove', ['document' => $document->getOldId(), 'user' => $document->getUser()->getId()]);
     }
 
     /**
@@ -131,7 +131,11 @@ class DoctrineDocumentSubscriber implements EventSubscriber
             return;
         }
 
+        // Transform file path in a File object
         $this->documentManager->handleFile($document);
+
+        // Init oldId
+        $document->setOldId();
     }
 
     /**
