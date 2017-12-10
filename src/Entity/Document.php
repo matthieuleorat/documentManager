@@ -10,6 +10,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Behavior\Timestampable;
 use App\Behavior\Userable;
@@ -157,7 +158,7 @@ class Document implements UserableInterface
     }
 
     /**
-     * @return mixed
+     * @return string|File
      */
     public function getFile()
     {
