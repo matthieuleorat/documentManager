@@ -115,7 +115,7 @@ class ResettingController extends Controller
         }
 
         return $this->render('Security/reset-password.html.twig', [
-           'form' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }

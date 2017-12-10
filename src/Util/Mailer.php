@@ -40,7 +40,7 @@ class Mailer
             ->setTo($user->getEmail())
             ->setBody(
                 $this->twig->render(
-                    'Security/emails/reset-password.html.twig',[
+                    'Security/emails/reset-password.html.twig', [
                         'user' => $user,
                         'url' => $url,
                     ]

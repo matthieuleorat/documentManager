@@ -60,7 +60,7 @@ class DocumentAdminController extends AdminController
         $tagsOptions = $formBuilder->get('tags')->getOptions();
 
         // Add the correct query to filter tags by user
-        $tagsOptions['query_builder'] = function (EntityRepository $er) use ($user) {
+        $tagsOptions['query_builder'] = function(EntityRepository $er) use ($user) {
             return $er->createQueryBuilder('t')
                 ->where('t.user = :user')
                 ->setParameter('user', $user);
