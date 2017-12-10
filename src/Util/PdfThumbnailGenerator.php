@@ -43,7 +43,7 @@ class PdfThumbnailGenerator
 
             $thumbnail = $path.$thumbnailName;
 
-            $i->writeImages($thumbnail,false);
+            $i->writeImages($thumbnail, false);
         }
     }
 }
