@@ -2,7 +2,8 @@
 [![Build Status](https://travis-ci.org/matthieuleorat/documentManager.svg?branch=master)](https://travis-ci.org/matthieuleorat/documentManager)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/matthieuleorat/documentManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/matthieuleorat/documentManager/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/matthieuleorat/documentManager/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/matthieuleorat/documentManager/?branch=master)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ 
 # Document Manager
 This project intend to be a personnal document manager. 
 
