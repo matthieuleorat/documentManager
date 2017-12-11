@@ -105,9 +105,6 @@ class DoctrineDocumentSubscriber implements EventSubscriber
             return;
         }
 
-        // Store id in a new attribute, because id is not defined in postRemove
-        //$document->setOldId($document->getId());
-
         // Delete Document
         $this->documentManager->deleteDocumentFile($document);
     }
