@@ -6,7 +6,7 @@
  * Time: 18:54
  */
 
-namespace App\Behavior;
+namespace App\Entity\Behavior;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;

@@ -8,9 +8,10 @@
 
 namespace App\Entity;
 
-use App\Behavior\Userable;
-use App\Behavior\UserableInterface;
+use App\Entity\Behavior\Userable;
+use App\Entity\Behavior\UserableInterface;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Behavior\Deleteable;
 
 /**
  * @ORM\Entity
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tag implements UserableInterface
 {
-    use Userable;
+    use Userable, Deleteable;
 
     /**
      * @ORM\Column(type="integer")

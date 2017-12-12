@@ -112,7 +112,10 @@ class DoctrineDocumentSubscriber implements EventSubscriber
     public function postRemove(LifecycleEventArgs $args)
     {
         /** @var Document $document */
-        $document = $args->getEntity();
+        if (false === ($document = $this->isDocument($args))) {
+            return;
+        }
+
         $this->logger->info('remove', ['document' => $document->getOldId(), 'user' => $document->getUser()->getId()]);
     }
 

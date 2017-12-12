@@ -41,6 +41,11 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    App\Listener\Doctrine\DoctrineTagSubscriber:
+        arguments: [ '@monolog.logger.tag' ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
     App\Listener\DocumentSubscriber:
         arguments: [ '@monolog.logger.document' ]
         tags:

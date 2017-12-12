@@ -8,8 +8,7 @@
 
 namespace App\Listener;
 
-
-use App\Behavior\UserableInterface;
+use App\Entity\Behavior\UserableInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

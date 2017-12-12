@@ -10,11 +10,12 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Behavior\Deleteable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Behavior\Timestampable;
-use App\Behavior\Userable;
-use App\Behavior\UserableInterface;
+use App\Entity\Behavior\Timestampable;
+use App\Entity\Behavior\Userable;
+use App\Entity\Behavior\UserableInterface;
 
 /**
  * @ORM\Entity
@@ -23,7 +24,7 @@ use App\Behavior\UserableInterface;
  */
 class Document implements UserableInterface
 {
-    use Userable, Timestampable;
+    use Userable, Timestampable, Deleteable;
 
     /**
      * @ORM\Column(type="integer")
@@ -73,11 +74,6 @@ class Document implements UserableInterface
      * @ORM\Column(type="string", length=150, nullable=true)
      */
     private $thumbnail;
-
-    /**
-     * @var integer
-     */
-    private $oldId;
 
     /**
      * @return mixed
@@ -231,22 +227,4 @@ class Document implements UserableInterface
         $this->thumbnail = $thumbnail;
         return $this;
     }
-
-    /**
-     * @return int
-     */
-    public function getOldId()
-    {
-        return $this->oldId;
-    }
-
-    /**
-     * @return Document
-     */
-    public function setOldId()
-    {
-        $this->oldId = $this->id;
-        return $this;
-    }
-
 }

@@ -6,7 +6,7 @@
  * Time: 18:02
  */
 
-namespace App\Behavior;
+namespace App\Entity\Behavior;
 
 use Doctrine\ORM\Mapping as ORM;
 

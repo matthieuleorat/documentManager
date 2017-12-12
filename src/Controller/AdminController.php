@@ -8,7 +8,7 @@
 
 namespace App\Controller;
 
-use App\Behavior\UserableInterface;
+use App\Entity\Behavior\UserableInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
 class AdminController extends BaseAdminController
