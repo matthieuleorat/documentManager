@@ -75,6 +75,11 @@ class Document implements UserableInterface
      */
     private $thumbnail;
 
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
+
     /**
      * @return mixed
      */
@@ -131,6 +136,11 @@ class Document implements UserableInterface
         $this->tags = $tags;
 
         return $this;
+    }
+
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->removeElement($tag);
     }
 
     /**
