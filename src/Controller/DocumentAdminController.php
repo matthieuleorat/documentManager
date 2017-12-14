@@ -37,7 +37,7 @@ class DocumentAdminController extends AdminController
         $this->get('event_dispatcher')->dispatch(DocumentEvents::DOCUMENT_DOWNLOAD, $event);
 
         // Return file
-        return $this->file($entity->getFile(), $entity->getName());
+        return $this->file($entity->getFile(), $entity->getName().'.'.$entity->getFile()->getExtension());
     }
 
     /**
