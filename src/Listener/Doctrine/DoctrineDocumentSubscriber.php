@@ -78,12 +78,18 @@ class DoctrineDocumentSubscriber implements EventSubscriber
             return;
         }
 
-        // Delete precedent File
         $precedentFile = $args->getEntityChangeSet()['file'][0];
-        $this->documentManager->deletePrecedentFile($document, $precedentFile);
 
-        // Upload Document File
-        $this->documentManager->uploadDocumentFile($document);
+        // If get is different from null, the file has been modified
+        if (null !== $document->getFile()) {
+            // Delete precedent File
+            $this->documentManager->deletePrecedentFile($document, $precedentFile);
+
+            // Upload Document File
+            $this->documentManager->uploadDocumentFile($document);
+        } else {
+            $document->setFile($precedentFile);
+        }
     }
 
     public function postUpdate(LifecycleEventArgs $args)

@@ -62,9 +62,7 @@ class Document implements UserableInterface
     private $description;
 
     /**
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $file;
