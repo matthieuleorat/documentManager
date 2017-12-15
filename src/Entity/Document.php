@@ -10,14 +10,16 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Behavior\Deleteable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Behavior\Timestampable;
 use App\Entity\Behavior\Userable;
 use App\Entity\Behavior\UserableInterface;
+use App\Entity\Behavior\Deleteable;
 
 /**
+ * @ApiResource
  * @ORM\Entity
  * @ORM\Table(name="document")
  * @ORM\HasLifecycleCallbacks()
