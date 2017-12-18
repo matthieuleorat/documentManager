@@ -79,7 +79,7 @@ class Document implements UserableInterface
      * @ORM\Column(type="string", length=150, nullable=true)
      */
     private $thumbnail;
-    
+
     /**
      * @var string
      */
