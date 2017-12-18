@@ -75,6 +75,8 @@ class Document implements UserableInterface
      */
     private $thumbnail;
 
+    private $fullThumbnailPath;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -235,6 +237,24 @@ class Document implements UserableInterface
     public function setThumbnail($thumbnail)
     {
         $this->thumbnail = $thumbnail;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFullThumbnailPath()
+    {
+        return $this->fullThumbnailPath;
+    }
+
+    /**
+     * @param mixed $fullThumbnailPath
+     * @return Document
+     */
+    public function setFullThumbnailPath($fullThumbnailPath)
+    {
+        $this->fullThumbnailPath = $fullThumbnailPath;
         return $this;
     }
 }

@@ -32,18 +32,28 @@ class DocumentManager
     /** @var PdfThumbnailGenerator  */
     private $thumbnailGenerator;
 
+    /** @var  string */
+    private $url;
+
     /**
      * DocumentManager constructor.
      * @param FileManager $fileManager
      * @param $project_dir
      * @param $document_directory
      */
-    public function __construct(FileManager $fileManager, $project_dir, $document_directory, PdfThumbnailGenerator $thumbnailGenerator)
+    public function __construct(
+        FileManager $fileManager,
+        $project_dir,
+        $document_directory,
+        PdfThumbnailGenerator $thumbnailGenerator,
+        $url
+    )
     {
         $this->thumbnailGenerator = $thumbnailGenerator;
         $this->fileManager = $fileManager;
         $this->project_dir = $project_dir.'/public';
         $this->document_directory = $document_directory;
+        $this->url = $url;
     }
 
     /**
@@ -125,6 +135,12 @@ class DocumentManager
         $thumbnailName = $this->generatorThumbailName($document->getFile()->getFilename());
 
         $this->fileManager->deleteFileByPath($document->getFile()->getPath().'/'.$thumbnailName);
+    }
+
+    public function constructFullThumbnailPath(Document $document)
+    {
+        $thumbnailFullPath = $this->url.$document->getThumbnail();
+        $document->setFullThumbnailPath($thumbnailFullPath);
     }
 
     /**

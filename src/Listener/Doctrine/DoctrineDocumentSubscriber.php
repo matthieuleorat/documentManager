@@ -142,6 +142,9 @@ class DoctrineDocumentSubscriber implements EventSubscriber
 
         // Init oldId
         $document->setOldId();
+
+        // Construct full
+        $this->documentManager->constructFullThumbnailPath($document);
     }
 
     /**

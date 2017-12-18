@@ -35,6 +35,7 @@ services:
             - '%kernel.project_dir%'
             - '%document_directory%'
             - '@App\Util\PdfThumbnailGenerator'
+            - '%env(APP_URL)%'
 
     App\Listener\Doctrine\DoctrineDocumentSubscriber:
         arguments: [ '@App\Manager\DocumentManager', '@monolog.logger.document' ]
