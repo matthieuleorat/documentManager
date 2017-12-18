@@ -19,7 +19,12 @@ use App\Entity\Behavior\UserableInterface;
 use App\Entity\Behavior\Deleteable;
 
 /**
- * @ApiResource
+ * @ApiResource(itemOperations={
+ *     "get"={"method"="GET"},
+ *     "delete"={"method"="DELETE"},
+ *     "put"={"method"="PUT"},
+ *     "download"={"route_name"="document_download"}
+ * })
  * @ORM\Entity
  * @ORM\Table(name="document")
  * @ORM\HasLifecycleCallbacks()
@@ -74,7 +79,10 @@ class Document implements UserableInterface
      * @ORM\Column(type="string", length=150, nullable=true)
      */
     private $thumbnail;
-
+    
+    /**
+     * @var string
+     */
     private $fullThumbnailPath;
 
     public function __construct()
