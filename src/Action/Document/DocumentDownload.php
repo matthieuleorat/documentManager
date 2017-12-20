@@ -8,14 +8,29 @@
 
 namespace App\Action\Document;
 
+use App\DocumentEvents;
 use App\Entity\Document;
+use App\Event\DocumentDownloadEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DocumentDownload
 {
+    /** @var EventDispatcherInterface $eventDispatcher */
+    private $eventDispatcher;
+
+    /**
+     * DocumentDownload constructor.
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @param Document $data
      *
@@ -26,19 +41,18 @@ class DocumentDownload
      * )
      * @Method("GET")
      *
-     * @return string|\Symfony\Component\HttpFoundation\File\File
+     * @return BinaryFileResponse
      */
-    public function __invoke(Document $data) // API Platform retrieves the PHP entity using the data provider then (for POST and
-        // PUT method) deserializes user data in it. Then passes it to the action. Here $data
-        // is an instance of Book having the given ID. By convention, the action's parameter
-        // must be called $data.
+    public function __invoke(Document $data)
     {
+        // Prepare response
         $response = new BinaryFileResponse($data->getFile());
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $data->getName().'.'.$data->getFile()->getExtension());
 
-        return $response;
+        // Dispatch Download Event
+        $event = new DocumentDownloadEvent($data);
+        $this->eventDispatcher->dispatch(DocumentEvents::DOCUMENT_DOWNLOAD, $event);
 
-        //return $data->getFile(); // API Platform will automatically validate, persist (if you use Doctrine) and serialize an entity
-        // for you. If you prefer to do it yourself, return an instance of Symfony\Component\HttpFoundation\Response
+        return $response;
     }
 }

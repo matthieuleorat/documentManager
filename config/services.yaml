@@ -51,3 +51,7 @@ services:
         arguments: [ '@monolog.logger.document' ]
         tags:
             - { name: kernel.event_subscriber }
+
+    # Api
+    App\Action\Document\DocumentDownload:
+        public: true

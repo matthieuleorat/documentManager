@@ -40,6 +40,8 @@ class DocumentManager
      * @param FileManager $fileManager
      * @param $project_dir
      * @param $document_directory
+     * @param PdfThumbnailGenerator $thumbnailGenerator
+     * @param $url
      */
     public function __construct(
         FileManager $fileManager,
