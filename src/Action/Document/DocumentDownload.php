@@ -10,6 +10,8 @@ namespace App\Action\Document;
 
 use App\Entity\Document;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DocumentDownload
@@ -31,7 +33,12 @@ class DocumentDownload
         // is an instance of Book having the given ID. By convention, the action's parameter
         // must be called $data.
     {
-        return $data->getFile(); // API Platform will automatically validate, persist (if you use Doctrine) and serialize an entity
+        $response = new BinaryFileResponse($data->getFile());
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $data->getName().'.'.$data->getFile()->getExtension());
+
+        return $response;
+
+        //return $data->getFile(); // API Platform will automatically validate, persist (if you use Doctrine) and serialize an entity
         // for you. If you prefer to do it yourself, return an instance of Symfony\Component\HttpFoundation\Response
     }
 }
