@@ -9,6 +9,7 @@ easy_admin:
                 fields:
                     - { property: 'thumbnail', type: 'image' }
                     - name
+                    - { property: tags, template: 'EasyAdmin/Document/tags.html.twig' }
                     - { property: 'createdAt', format: 'd/m/Y h:i:s' }
                     - { property: 'updatedAt', format: 'd/m/Y h:i:s' }
             form:
