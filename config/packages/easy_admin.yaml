@@ -1,5 +1,11 @@
 easy_admin:
     site_name: 'Document Manager'
+    design:
+        assets:
+            css:
+                - 'stylesheet/admin.css'
+            js:
+                - 'js/admin/jscolor.min.js'
     entities:
         Document:
             class: App\Entity\Document
@@ -24,6 +30,8 @@ easy_admin:
                 fields:
                     - id
                     - name
+                    - { property: color, template: 'EasyAdmin/Tag/color.html.twig' }
             form:
                 fields:
                     - name
+                    - { property: color, type_options: { attr: { class: 'jscolor' } } }

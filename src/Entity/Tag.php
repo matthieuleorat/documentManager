@@ -34,6 +34,11 @@ class Tag implements UserableInterface
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=7)
+     */
+    private $color;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -64,6 +69,24 @@ class Tag implements UserableInterface
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param mixed $color
+     * @return Tag
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
         return $this;
     }
 }
