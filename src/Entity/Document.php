@@ -23,10 +23,10 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 /**
  * @ApiResource(
  *     attributes={
- *         "normalization_context"={"groups"={"get"}}
+ *         "normalization_context"={"groups"={"document_read"}}
  *     },
  *     itemOperations={
- *     "get"={"method"="GET", "normalization_context"={"groups"={"get"}}},
+ *     "get"={"method"="GET", "normalization_context"={"groups"={"document_read"}}},
  *     "delete"={"method"="DELETE"},
  *     "put"={"method"="PUT"},
  *     "download"={"route_name"="document_download"}
@@ -43,13 +43,13 @@ class Document implements UserableInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups("get")
+     * @Groups({"document_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups("get")
+     * @Groups({"document_read"})
      */
     private $name;
 
@@ -66,8 +66,8 @@ class Document implements UserableInterface
     /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
-     * @ApiSubresource
-     * @Groups("get")
+     * @ApiSubresource()
+     * @Groups({"document_read"})
      */
     private $tags;
 
@@ -75,7 +75,7 @@ class Document implements UserableInterface
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
-     * @Groups("get")
+     * @Groups({"document_read"})
      */
     private $description;
 
@@ -93,7 +93,7 @@ class Document implements UserableInterface
 
     /**
      * @var string
-     * @Groups("get")
+     * @Groups({"document_read"})
      */
     private $fullThumbnailPath;
 

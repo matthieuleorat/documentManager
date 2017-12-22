@@ -13,6 +13,7 @@ use App\Entity\Behavior\UserableInterface;
 use App\Entity\Behavior\Deleteable;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
@@ -27,16 +28,19 @@ class Tag implements UserableInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"document_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"document_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=7)
+     * @Groups({"document_read"})
      */
     private $color;
 
