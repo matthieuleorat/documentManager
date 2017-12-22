@@ -17,10 +17,16 @@ use App\Entity\Behavior\Timestampable;
 use App\Entity\Behavior\Userable;
 use App\Entity\Behavior\UserableInterface;
 use App\Entity\Behavior\Deleteable;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource(itemOperations={
- *     "get"={"method"="GET"},
+ * @ApiResource(
+ *     attributes={
+ *         "normalization_context"={"groups"={"get"}}
+ *     },
+ *     itemOperations={
+ *     "get"={"method"="GET", "normalization_context"={"groups"={"get"}}},
  *     "delete"={"method"="DELETE"},
  *     "put"={"method"="PUT"},
  *     "download"={"route_name"="document_download"}
@@ -37,11 +43,13 @@ class Document implements UserableInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups("get")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups("get")
      */
     private $name;
 
@@ -58,6 +66,8 @@ class Document implements UserableInterface
     /**
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
+     * @ApiSubresource
+     * @Groups("get")
      */
     private $tags;
 
@@ -65,6 +75,7 @@ class Document implements UserableInterface
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("get")
      */
     private $description;
 
@@ -82,6 +93,7 @@ class Document implements UserableInterface
 
     /**
      * @var string
+     * @Groups("get")
      */
     private $fullThumbnailPath;
 

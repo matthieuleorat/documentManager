@@ -10,12 +10,14 @@ namespace App\Entity;
 
 use App\Entity\Behavior\Userable;
 use App\Entity\Behavior\UserableInterface;
-use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Behavior\Deleteable;
+use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="tag")
+ * @ApiResource()
  */
 class Tag implements UserableInterface
 {
