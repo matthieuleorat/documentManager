@@ -10,6 +10,13 @@ login:
 logout:
     path: /logout
 
+api_login:
+    path: /api/login
+    defaults: { _controller: 'App\Controller\Api\LoginController::login' }
+
+api_login_check:
+    path: /api/login_check
+
 # Resetting
 request_password:
     path: /resetting/request-password

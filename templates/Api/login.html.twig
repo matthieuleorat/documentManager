@@ -1,0 +1,36 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Document Manager API</h1>
+
+    <div class="login-page">
+        <div class="form">
+
+            {% if error %}
+                <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <form action="{{ path('api_login_check') }}" method="post">
+
+                <div>
+                    <label for="username">Email:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" />
+                </div>
+                <div class="cta">
+                    <div>
+                        <input type="checkbox" id="remember_me" name="_remember_me" checked />
+                        <label for="remember_me">Keep me logged in</label>
+                    </div>
+                    <div>
+                        <button type="submit">Connexion</button>
+                    </div>
+                </div>
+            </form>
+            {#<a href="{{ path('request_password') }}">Forgot password ?</a>#}
+        </div>
+    </div>
+{% endblock %}
