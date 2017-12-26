@@ -9,10 +9,6 @@ security:
                 class: App\Entity\User
                 property: username
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
         login_api:
             pattern:  ^/api/login
             stateless: true
@@ -48,9 +44,14 @@ security:
                 lifetime: 604800 # 1 week in seconds
                 path:     /
 
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: [ROLE_USER] }
-#        - { path: ^/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
