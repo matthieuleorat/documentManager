@@ -38,24 +38,24 @@ class DocumentManager
     /**
      * DocumentManager constructor.
      * @param FileManager $fileManager
-     * @param $project_dir
+     * @param $projectDir
      * @param $document_directory
      * @param PdfThumbnailGenerator $thumbnailGenerator
-     * @param $url
+     * @param $app_url
      */
     public function __construct(
         FileManager $fileManager,
-        $project_dir,
-        $document_directory,
         PdfThumbnailGenerator $thumbnailGenerator,
-        $url
+        $projectDir,
+        $document_directory,
+        $app_url
     )
     {
         $this->thumbnailGenerator = $thumbnailGenerator;
         $this->fileManager = $fileManager;
-        $this->project_dir = $project_dir.'/public';
+        $this->project_dir = $projectDir.'/public';
         $this->document_directory = $document_directory;
-        $this->url = $url;
+        $this->url = $app_url;
     }
 
     /**
