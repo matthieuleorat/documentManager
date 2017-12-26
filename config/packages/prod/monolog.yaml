@@ -1,17 +1,32 @@
 monolog:
+    channels: [ 'document', 'tag' ]
     handlers:
         main:
-            type: fingers_crossed
-            action_level: error
-            handler: nested
-            excluded_404s:
-                # regex: exclude all 404 errors from the logs
-                - ^/
-        nested:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+            channels: ["!event"]
+        document:
+            type: rotating_file
+            level: info
+            path: "%kernel.logs_dir%/%kernel.environment%-document.log"
+            max_files: 10
+            channels: document
+        tag:
+            type: rotating_file
+            level: info
+            path: "%kernel.logs_dir%/%kernel.environment%-tag.log"
+            max_files: 10
+            channels: tag
+        # uncomment to get logging in your browser
+        # you may have to allow bigger header sizes in your Web server configuration
+        #firephp:
+        #    type: firephp
+        #    level: info
+        #chromephp:
+        #    type: chromephp
+        #    level: info
         console:
             type:   console
             process_psr_3_messages: false
-            channels: ["!event", "!doctrine"]
+            channels: ["!event", "!doctrine", "!console"]
