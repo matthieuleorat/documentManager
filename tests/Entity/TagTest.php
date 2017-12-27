@@ -33,6 +33,20 @@ class TagTest extends TestCase
         $this->assertEquals($name, $tag->getName());
     }
 
+    public function testGetColor()
+    {
+        $tag = $this->getTag();
+        $this->assertEquals(NULL, $tag->getColor());
+    }
+
+    public function testSetColor()
+    {
+        $color = "ffffff";
+        $tag = $this->getTag();
+        $tag->setColor($color);
+        $this->assertEquals($color, $tag->getColor());
+    }
+
     public function testToString()
     {
         $name = "Tag Name";

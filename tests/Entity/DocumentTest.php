@@ -107,6 +107,16 @@ class DocumentTest extends TestCase
         $this->assertEquals($thumbnail, $document->getThumbnail());
     }
 
+    public function testThumbnailPath()
+    {
+        $document = $this->getDocument();
+        $this->assertEquals(NULL, $document->getFullThumbnailPath());
+
+        $thumbnailpath = "/path-to-thumnail";
+        $document->setFullThumbnailPath($thumbnailpath);
+        $this->assertEquals($thumbnailpath, $document->getFullThumbnailPath());
+    }
+
     public function testUser()
     {
         $document = $this->getDocument();
