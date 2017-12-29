@@ -245,7 +245,7 @@ class User implements AdvancedUserInterface, \Serializable
     /** @see \Serializable::unserialize() */
     public function unserialize($serialized)
     {
-        list (
+        return list (
             $this->id,
             $this->email,
             $this->username,
