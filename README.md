@@ -3,7 +3,8 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/matthieuleorat/documentManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/matthieuleorat/documentManager/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/matthieuleorat/documentManager/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/matthieuleorat/documentManager/?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
- 
+[![Maintainability](https://api.codeclimate.com/v1/badges/7afc33ea65c38c72f1d7/maintainability)](https://codeclimate.com/github/matthieuleorat/documentManager/maintainability)
+
 # Document Manager
 This project intend to be a personnal document manager. 
 
