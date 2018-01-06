@@ -4,45 +4,30 @@ security:
             algorithm: bcrypt
 
     providers:
-        our_db_provider: # Arbitrary name
+        db_provider:
             entity:
                 class: App\Entity\User
                 property: username
     firewalls:
-        login_api:
+        login:
             pattern:  ^/api/login
             stateless: true
             anonymous: true
-            provider: our_db_provider
+            provider: db_provider
             form_login:
                 check_path: /api/login_check
+                username_parameter: _username
+                password_parameter: _password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
 
-        api:
+        main:
             pattern:   ^/api
-            provider: our_db_provider
+            provider: db_provider
             stateless: true
             anonymous: true
             lexik_jwt: ~
-
-        # Easy Admin Bundle
-        main:
-            pattern:    ^/
-            provider: our_db_provider # Use any declared provider above
-            form_login:
-                login_path: login
-                check_path: login
-                default_target_path: /
-            anonymous: true
-            logout:
-                path:   /logout
-                target: /
-            remember_me:
-                secret:   '%env(APP_SECRET)%'
-                lifetime: 604800 # 1 week in seconds
-                path:     /
 
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -51,7 +36,4 @@ security:
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: [ROLE_USER] }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
