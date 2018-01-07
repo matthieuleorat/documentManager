@@ -1,5 +1,5 @@
 monolog:
-    channels: [ 'document', 'tag' ]
+    channels: [ 'document', 'tag', 'security' ]
     handlers:
         main:
             type: stream
@@ -18,6 +18,12 @@ monolog:
             path: "%kernel.logs_dir%/%kernel.environment%-tag.log"
             max_files: 10
             channels: tag
+        security:
+            type: rotating_file
+            level: info
+            path: "%kernel.logs_dir%/%kernel.environment%-security.log"
+            max_files: 10
+            channels: security
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
         #firephp:

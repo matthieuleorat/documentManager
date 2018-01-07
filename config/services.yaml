@@ -52,3 +52,10 @@ services:
     # Api
     App\Action\Document\DocumentDownload:
         public: true
+
+    # Security
+    App\Listener\Security\LoginFailedListener:
+        arguments:
+            $logger: '@monolog.logger.security'
+        tags:
+            - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
