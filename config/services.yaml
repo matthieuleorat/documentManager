@@ -53,6 +53,11 @@ services:
     App\Action\Document\DocumentDownload:
         public: true
 
+    'App\Doctrine\ORM\Extension\CurrentUserExtension':
+        tags:
+            - { name: api_platform.doctrine.orm.query_extension.collection, priority: 9 }
+            - { name: api_platform.doctrine.orm.query_extension.item }
+
     # Security
     App\Listener\Security\LoginFailedListener:
         arguments:

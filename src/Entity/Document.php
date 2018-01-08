@@ -12,25 +12,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Entity\Behavior\Timestampable;
 use App\Entity\Behavior\Userable;
 use App\Entity\Behavior\UserableInterface;
 use App\Entity\Behavior\Deleteable;
-use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource(
  *     attributes={
- *         "normalization_context"={"groups"={"document_read"}}
+ *          "normalization_context"={"groups"={"document_read"}}
  *     },
  *     itemOperations={
- *     "get"={"method"="GET", "normalization_context"={"groups"={"document_read"}}},
- *     "delete"={"method"="DELETE"},
- *     "put"={"method"="PUT"},
- *     "download"={"route_name"="document_download"}
- * })
+ *          "get"={"method"="GET", "normalization_context"={"groups"={"document_read"}}},
+ *          "delete"={"method"="DELETE"},
+ *          "put"={"method"="PUT"},
+ *          "download"={"route_name"="document_download"}
+ *      }
+ * )
  * @ORM\Entity
  * @ORM\Table(name="document")
  * @ORM\HasLifecycleCallbacks()
