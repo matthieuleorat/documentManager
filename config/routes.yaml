@@ -1,14 +1,14 @@
 easy_admin_bundle:
     resource: "Controller/AdminController.php"
-    prefix: /
+    prefix: /admin
     type: annotation
 
 # Security
 login:
-    path: /login
+    path: /admin/login
     defaults: { _controller: 'App\Controller\Security\SecurityController::login' }
 logout:
-    path: /logout
+    path: /admin/logout
 
 api_login:
     path: /api/login

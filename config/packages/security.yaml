@@ -29,6 +29,21 @@ security:
             anonymous: true
             lexik_jwt: ~
 
+        admin:
+            provider: db_provider # Use any declared provider above
+            form_login:
+                login_path: /admin/login
+                check_path: /admin/login
+                default_target_path: /admin
+            anonymous: true
+            logout:
+                path:   /admin/logout
+                target: /admin/login
+            remember_me:
+                secret:   '%env(APP_SECRET)%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /admin
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -37,3 +52,5 @@ security:
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin,       roles: IS_AUTHENTICATED_FULLY }
