@@ -9,6 +9,7 @@
 namespace App\Doctrine\ORM\Extension;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\Document;
 use App\Entity\User;
@@ -21,7 +22,7 @@ use Doctrine\ORM\QueryBuilder;
  * Class CurrentUserExtension
  * @package App\Doctrine\ORM\Extension
  */
-class CurrentUserExtension implements QueryCollectionExtensionInterface
+class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     private $tokenStorage;
     private $authorizationChecker;
@@ -36,6 +37,11 @@ class CurrentUserExtension implements QueryCollectionExtensionInterface
      * {@inheritdoc}
      */
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
+    {
+        $this->addWhere($queryBuilder, $resourceClass);
+    }
+
+    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, string $operationName = null, array $context = [])
     {
         $this->addWhere($queryBuilder, $resourceClass);
     }
