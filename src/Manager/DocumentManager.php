@@ -81,7 +81,7 @@ class DocumentManager
 
         $this->fileManager->uploadFile($file, $fileName, $this->project_dir.$path);
 
-        $thumbnailName = $this->generatorThumbailName($fileName);
+        $thumbnailName = $this->generatorThumbnailName($fileName);
         $document->setThumbnail($path.'/'.$thumbnailName);
 
         $this->thumbnailGenerator->generateThumbnail($fileName, $this->project_dir.$path.'/', $thumbnailName);
@@ -134,7 +134,7 @@ class DocumentManager
      */
     public function deleteThumbnail(Document $document)
     {
-        $thumbnailName = $this->generatorThumbailName($document->getFile()->getFilename());
+        $thumbnailName = $this->generatorThumbnailName($document->getFile()->getFilename());
 
         $this->fileManager->deleteFileByPath($document->getFile()->getPath().'/'.$thumbnailName);
     }
@@ -151,7 +151,7 @@ class DocumentManager
      * @param $filename
      * @return string
      */
-    private function generatorThumbailName($filename)
+    private function generatorThumbnailName($filename)
     {
         return 'thumbnail-'.str_replace('pdf', 'jpg', $filename);
     }
