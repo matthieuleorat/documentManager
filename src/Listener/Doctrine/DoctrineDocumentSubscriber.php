@@ -14,6 +14,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Psr\Log\LoggerInterface;
 use Doctrine\Common\EventSubscriber;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class DoctrineDocumentSubscriber implements EventSubscriber
 {
@@ -81,13 +83,16 @@ class DoctrineDocumentSubscriber implements EventSubscriber
         $precedentFile = $args->getEntityChangeSet()['file'][0];
 
         // If get is different from null, the file has been modified
-        if (null !== $document->getFile()) {
+        if ($document->getFile() instanceof UploadedFile) {
             // Delete precedent File
             $this->documentManager->deletePrecedentFile($document, $precedentFile);
 
             // Upload Document File
             $this->documentManager->uploadDocumentFile($document);
         } else {
+            if ($precedentFile instanceof File) {
+                $precedentFile = $precedentFile->getFilename();
+            }
             $document->setFile($precedentFile);
         }
     }
