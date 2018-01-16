@@ -178,7 +178,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getConfirmationToken()
     {
