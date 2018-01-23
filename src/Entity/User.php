@@ -242,7 +242,11 @@ class User implements AdvancedUserInterface, \Serializable
         ));
     }
 
-    /** @see \Serializable::unserialize() */
+    /**
+     * @see \Serializable::unserialize()
+     * @param string $serialized
+     * @return array
+     */
     public function unserialize($serialized)
     {
         return list (
