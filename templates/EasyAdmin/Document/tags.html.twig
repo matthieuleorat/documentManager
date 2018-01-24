@@ -1,3 +1,3 @@
 {% for tag in value %}
-    <span class="tag-color" style="{% if tag.color != null %}background-color:#{{ tag.color }}{% endif %}">{{ tag.name }}</span>
+    {{ tag|colorize }}
 {% endfor %}
