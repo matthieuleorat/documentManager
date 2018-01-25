@@ -63,7 +63,10 @@ class DoctrineDocumentSubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         /** @var Document $document */
-        $document = $args->getEntity();
+        if (false === ($document = $this->isDocument($args))) {
+            return;
+        }
+
         $this->logger->info('create', ['document' => $document->getId(), 'user' => $document->getUser()->getId()]);
     }
 
@@ -100,7 +103,11 @@ class DoctrineDocumentSubscriber implements EventSubscriber
     public function postUpdate(LifecycleEventArgs $args)
     {
         /** @var Document $document */
-        $document = $args->getEntity();
+        /** @var Document $document */
+        if (false === ($document = $this->isDocument($args))) {
+            return;
+        }
+
         $this->logger->info('edit', ['document' => $document->getId(), 'user' => $document->getUser()->getId()]);
     }
 

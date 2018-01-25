@@ -77,6 +77,20 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->id;
     }
 
+    /**
+     * @param $username
+     * @return $this
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getUsername()
     {
         return $this->username;
