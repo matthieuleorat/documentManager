@@ -39,6 +39,12 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    App\Listener\ExceptionSubscriber:
+        arguments:
+            $logger: '@monolog.logger.exception'
+        tags:
+            - { name: kernel.event_subscriber }
+
     App\Listener\Doctrine\DoctrineTagSubscriber:
         arguments:
             $logger: '@monolog.logger.tag'
