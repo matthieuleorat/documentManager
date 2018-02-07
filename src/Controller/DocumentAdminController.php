@@ -29,7 +29,7 @@ class DocumentAdminController extends AdminController
         /** @var Document $entity */
         $entity = $easyadmin['item'];
 
-        // Check if user is authirized to downaload this document
+        // Check if user is authorized to download this document
         $this->denyAccessUnlessGranted('download', $entity);
 
         // Dispatch DocumentDownloadEvent
