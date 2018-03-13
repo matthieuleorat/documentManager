@@ -56,10 +56,7 @@
     "doctrine/orm": {
         "version": "v2.5.12"
     },
-    "egulias/email-validator": {
-        "version": "2.1.3"
-    },
-    "javiereguiluz/easyadmin-bundle": {
+    "easycorp/easyadmin-bundle": {
         "version": "1.17",
         "recipe": {
             "repo": "github.com/symfony/recipes",
@@ -67,6 +64,9 @@
             "version": "1.17",
             "ref": "66070ea553247b0cd5275e21d0fe5399a25f40be"
         }
+    },
+    "egulias/email-validator": {
+        "version": "2.1.3"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
