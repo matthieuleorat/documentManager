@@ -11,7 +11,11 @@ easy_admin:
             class: App\Entity\Document
             controller: App\Controller\DocumentAdminController
             list:
-                actions: ['edit', 'download', 'delete']
+                actions:
+                    - { name: 'edit'}
+                    - { name: 'download', icon: 'download', label: '' }
+                    - { name: 'delete'}
+                    - { name: 'send', icon: 'envelope ', label: '' }
                 fields:
                     - { property: 'thumbnail', type: 'image' }
                     - name

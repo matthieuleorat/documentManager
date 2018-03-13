@@ -11,3 +11,4 @@
 ###< symfony/phpunit-bridge ###
 /report/
 /public/uploads/
+.composer

@@ -12,11 +12,26 @@ use App\DocumentEvents;
 use App\Entity\Document;
 use App\Entity\User;
 use App\Event\DocumentDownloadEvent;
+use App\Manager\DocumentManager;
 use Doctrine\ORM\EntityRepository;
+use App\Form\Type\SendDocumentToType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\HttpFoundation\Request;
 
 class DocumentAdminController extends AdminController
 {
+    /** @var DocumentManager */
+    private $documentManager;
+
+    /**
+     * DocumentAdminController constructor.
+     * @param DocumentManager $documentManager
+     */
+    public function __construct(DocumentManager $documentManager)
+    {
+        $this->documentManager = $documentManager;
+    }
+
     /**
      * Return a document
      *
@@ -38,6 +53,35 @@ class DocumentAdminController extends AdminController
 
         // Return file
         return $this->file($entity->getFile(), $entity->getName().'.'.$entity->getFile()->getExtension());
+    }
+
+    public function sendDocumentAction()
+    {
+        $easyadmin = $this->request->attributes->get('easyadmin');
+
+        /** @var Document $entity */
+        $entity = $easyadmin['item'];
+
+        $form = $this->createForm(SendDocumentToType::class);
+
+        $form->handleRequest($this->request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $datas = $form->getData();
+            $this->documentManager->sendDocumentTo($entity, $datas['recipients'], $datas['subject'], $datas['message']);
+
+            return $this->redirectToRoute('easyadmin', [
+                'action' => 'list',
+                'entity' => $easyadmin['entity']['name'],
+            ]);
+        }
+
+        return $this->render(
+            'App/Document/sendDocumentTo.html.twig', [
+                'form' => $form->createView(),
+                'entity' => $entity,
+            ]
+        );
     }
 
     /**

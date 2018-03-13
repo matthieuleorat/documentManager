@@ -33,6 +33,9 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Action\Document\UploadAction:
+        public: true
+
     App\Listener\Doctrine\DoctrineDocumentSubscriber:
         arguments:
             $logger: '@monolog.logger.document'
@@ -59,7 +62,7 @@ services:
     App\Action\Document\DocumentDownload:
         public: true
 
-    'App\Doctrine\ORM\Extension\CurrentUserExtension':
+    App\Doctrine\ORM\Extension\CurrentUserExtension:
         tags:
             - { name: api_platform.doctrine.orm.query_extension.collection, priority: 9 }
             - { name: api_platform.doctrine.orm.query_extension.item }

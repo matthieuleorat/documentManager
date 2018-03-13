@@ -9,13 +9,14 @@
 namespace App\Util;
 
 
+use App\Entity\Document;
 use App\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class Mailer
 {
-
+    /** @var RouterInterface */
     private $router;
 
     /** @var \Twig_Environment  */
@@ -47,6 +48,49 @@ class Mailer
                 ),
                 'text/html'
             );
+
+        $this->swift->send($message);
+    }
+
+    /**
+     * @param string $subject
+     * @param string $from
+     * @param array|string $to
+     * @param string $template
+     * @param array $templateParams
+     * @param array|null $attachments
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function sendEmail(string $subject, string $from, $to, string $template, array $templateParams, ?array $attachments = null)
+    {
+        $message = (new \Swift_Message($subject))
+            ->setFrom($from)
+            ->setTo($to)
+            ->setBody(
+                $this->twig->render(
+                    $template, $templateParams
+                ),
+                'text/html'
+            );
+
+        if (null !== $attachments) {
+            foreach ($attachments as $attachment) {
+                if (is_array($attachment)) {
+                    $file = $attachment[0];
+                    $filename = $attachment[1];
+                    $message->attach(
+                        \Swift_Attachment::fromPath($file)->setFilename($filename)
+                    );
+                } else {
+                    $message->attach(
+                        \Swift_Attachment::fromPath($attachment)
+                    );
+                }
+
+            }
+        }
 
         $this->swift->send($message);
     }

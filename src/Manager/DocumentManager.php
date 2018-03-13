@@ -11,6 +11,7 @@ namespace App\Manager;
 use App\Entity\Document;
 use App\Entity\User;
 use App\Util\FileManager;
+use App\Util\Mailer;
 use App\Util\PdfThumbnailGenerator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -32,23 +33,28 @@ class DocumentManager
     /** @var PdfThumbnailGenerator  */
     private $thumbnailGenerator;
 
-    /** @var  string */
+    /** @var string */
     private $url;
+
+    /** @var Mailer */
+    private $mailer;
 
     /**
      * DocumentManager constructor.
      * @param FileManager $fileManager
+     * @param PdfThumbnailGenerator $thumbnailGenerator
      * @param $projectDir
      * @param $document_directory
-     * @param PdfThumbnailGenerator $thumbnailGenerator
      * @param $app_url
+     * @param Mailer $mailer
      */
     public function __construct(
         FileManager $fileManager,
         PdfThumbnailGenerator $thumbnailGenerator,
         $projectDir,
         $document_directory,
-        $app_url
+        $app_url,
+        Mailer $mailer
     )
     {
         $this->thumbnailGenerator = $thumbnailGenerator;
@@ -56,6 +62,7 @@ class DocumentManager
         $this->project_dir = $projectDir.'/public';
         $this->document_directory = $document_directory;
         $this->url = $app_url;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -143,6 +150,20 @@ class DocumentManager
     {
         $thumbnailFullPath = $this->url.$document->getThumbnail();
         $document->setFullThumbnailPath($thumbnailFullPath);
+    }
+
+    public function sendDocumentTo(Document $document, $to, $subject, $message)
+    {
+        $from = $document->getUser()->getEmail();
+        $template = 'App/Emails/sendDocumentTo.html.twig';
+        $templateParams = ['message' => $message];
+        $attachments = [
+            [$document->getFile()->getPathname(), $document->getName().'.'.$document->getFile()->getExtension()]
+        ];
+
+
+        $this->mailer->sendEmail($subject, $from, $to, $template, $templateParams, $attachments);
+
     }
 
     /**
