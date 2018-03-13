@@ -25,9 +25,9 @@ class AppExtension extends AbstractExtension
     {
         $style = '';
         if (null !== $tag->getColor()) {
-            $style = "background-color:#{$tag->getColor()};";
+            $style = "background-color:#{$tag->getColor()};display: inline-block; width: 10px; height:10px; margin-right: 5px;";
         }
 
-        return '<span class="tag-color" style="'.$style.'">'.$tag->getName().'</span>';
+        return '<span class="tag-color" ><span style="'.$style.'"></span>'.$tag->getName().'</span>';
     }
 }
