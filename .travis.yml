@@ -6,6 +6,7 @@ php:
 env:
   global:
     - TARGET=test
+    - APP_REPORT_ERROR_EMAIL='test@email.com'
 
 matrix:
   fast_finish: true
