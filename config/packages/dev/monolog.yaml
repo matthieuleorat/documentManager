@@ -42,3 +42,15 @@ monolog:
             type:   console
             process_psr_3_messages: false
             channels: ["!event", "!doctrine", "!console"]
+        deduplicated:
+            type:    deduplication
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: "%env(APP_REPORT_ERROR_EMAIL)%"
+            to_email:   "%env(APP_REPORT_ERROR_EMAIL)%"
+            subject:    'An Error Occurred! %%message%%'
+            level:      error
+            formatter:  monolog.formatter.html
+            content_type: text/html
+
