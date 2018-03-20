@@ -70,6 +70,8 @@ class DocumentAdminController extends AdminController
             $datas = $form->getData();
             $this->documentManager->sendDocumentTo($entity, $datas['recipients'], $datas['subject'], $datas['message']);
 
+            $this->addFlash('success', $this->get('translator')->trans('app.document.send.success', ['%doc%' => $entity->getName()]));
+
             return $this->redirectToRoute('easyadmin', [
                 'action' => 'list',
                 'entity' => $easyadmin['entity']['name'],
