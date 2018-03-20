@@ -37,26 +37,23 @@ services:
         public: true
 
     App\Listener\Doctrine\DoctrineDocumentSubscriber:
-        arguments:
-            $logger: '@monolog.logger.document'
         tags:
             - { name: doctrine.event_subscriber }
+            - { name: monolog.logger, channel: document}
 
     App\Listener\ExceptionSubscriber:
-        arguments:
-            $logger: '@monolog.logger.exception'
         tags:
             - { name: kernel.event_subscriber }
+            - { name: monolog.logger, channel: exception}
 
     App\Listener\Doctrine\DoctrineTagSubscriber:
-        arguments:
-            $logger: '@monolog.logger.tag'
         tags:
             - { name: doctrine.event_subscriber }
+            - { name: monolog.logger, channel: tag}
 
     App\Listener\DocumentSubscriber:
-        arguments:
-            $logger: '@monolog.logger.document'
+        tags:
+            - { name: monolog.logger, channel: document}
 
     # Api
     App\Action\Document\DocumentDownload:
@@ -69,7 +66,6 @@ services:
 
     # Security
     App\Listener\Security\LoginFailedListener:
-        arguments:
-            $logger: '@monolog.logger.security'
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
+            - { name: monolog.logger, channel: security}

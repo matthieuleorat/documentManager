@@ -25,6 +25,11 @@ class DoctrineDocumentSubscriber implements EventSubscriber
     /** @var LoggerInterface  */
     private $logger;
 
+    /**
+     * DoctrineDocumentSubscriber constructor.
+     * @param DocumentManager $documentManager
+     * @param LoggerInterface $logger
+     */
     public function __construct(DocumentManager $documentManager, LoggerInterface $logger)
     {
         $this->documentManager = $documentManager;
