@@ -99,7 +99,7 @@ class AdminController extends BaseAdminController
         $dqlFilter = $this->userDqlFilter($entityClass, $dqlFilter);
 
         return parent::findBy($entityClass, $searchQuery, $searchableFields, $page, $maxPerPage, $sortField,
-            $sortDirection, $dqlFilter); //
+            $sortDirection, $dqlFilter);
     }
 
     /**

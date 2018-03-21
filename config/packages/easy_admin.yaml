@@ -7,6 +7,18 @@ easy_admin:
             js:
                 - 'js/admin/jscolor.min.js'
     entities:
+        Folder:
+            class: App\Entity\Folder
+            controller: App\Controller\EasyAdmin\FolderController
+            form:
+                fields:
+                    - name
+                    - documents
+            list:
+                fields:
+                    - { property: name }
+                    - { property: 'createdAt', format: 'd/m/Y h:i:s' }
+                    - { property: 'updatedAt', format: 'd/m/Y h:i:s' }
         Document:
             class: App\Entity\Document
             controller: App\Controller\DocumentAdminController

@@ -49,6 +49,7 @@ class Document implements UserableInterface
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=100)
      * @Groups({"document_read"})
      */
@@ -101,6 +102,11 @@ class Document implements UserableInterface
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**
