@@ -106,11 +106,11 @@ class Document implements UserableInterface
 
     public function __toString()
     {
-        return $this->getName();
+        return $this->name;
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getId()
     {
@@ -118,7 +118,7 @@ class Document implements UserableInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -126,10 +126,10 @@ class Document implements UserableInterface
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      * @return Document
      */
-    public function setName($name)
+    public function setName(string $name) : Document
     {
         $this->name = $name;
         return $this;
