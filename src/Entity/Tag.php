@@ -52,6 +52,11 @@ class Tag implements UserableInterface
         return $this->getName();
     }
 
+    public function __construct()
+    {
+        $this->color = dechex(rand(0x000000, 0xFFFFFF));
+    }
+
     /**
      * @return mixed
      */
