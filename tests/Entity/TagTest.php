@@ -36,7 +36,7 @@ class TagTest extends TestCase
     public function testGetColor()
     {
         $tag = $this->getTag();
-        $this->assertEquals(NULL, $tag->getColor());
+        $this->assertRegExp('/[ABCDEF0123456789]{6}/i',  $tag->getColor());
     }
 
     public function testSetColor()
