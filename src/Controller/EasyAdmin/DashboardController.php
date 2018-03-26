@@ -27,15 +27,23 @@ class DashboardController extends AdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //die(dump($form->getData()));
+
+            $selectedTags = $form->get('tags')->getData();
+
+            $documents = $em->getRepository(Document::class)->searchByTags($selectedTags);
+
+            return $this->render('EasyAdmin\Dashboard\dashboard.html.twig', [
+                'form' => $form->createView(),
+                'tags' => $tags,
+                'documents' => $documents,
+            ]);
+
             return $this->render('EasyAdmin\fragment\tagselection.html.twig', [
                 'form' => $form->createView(),
             ]);
         }
 
-        $selectedTags = [4];
-
-        $documents = $em->getRepository(Document::class)->searchByTags($selectedTags);
+        $documents = $em->getRepository(Document::class)->searchByTags();
 
         return $this->render('EasyAdmin\Dashboard\dashboard.html.twig', [
             'form' => $form->createView(),

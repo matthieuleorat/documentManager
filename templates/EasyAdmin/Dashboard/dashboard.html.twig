@@ -8,7 +8,7 @@
     {% include '/EasyAdmin/fragment/tagselection.html.twig' %}
 
     <h1>Documents</h1>
-    <ul>
+    <ul class="search-document-container">
         {% for document in documents %}
             <li>
                 {{ document.name }}
@@ -30,7 +30,13 @@
                 type: $form.attr('method'),
                 data : datas,
                 success: function(html) {
-                    $('.select-tags-container').replaceWith(html);
+                    $('.select-tags-container').replaceWith(
+                        $(html).find('.select-tags-container')
+                    );
+
+                    $('.search-document-container').replaceWith(
+                        $(html).find('.search-document-container')
+                    );
                 }
             });
         });

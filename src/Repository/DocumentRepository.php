@@ -19,17 +19,17 @@ class DocumentRepository extends ServiceEntityRepository
         parent::__construct($registry, Document::class);
     }
 
-    public function searchByTags(array $tags)
+    public function searchByTags($tags = [])
     {
         $qb = $this->createQueryBuilder('d')
+            ->where('1 = 1')
             ->orderBy('d.id', 'ASC');
 
         if (false === empty($tags)) {
-            $qb
-                ->leftJoin('d.tags','t')
-                ->where('t.id in (:tags)')
-                ->setParameter(':tags', $tags)
-            ;
+            foreach ($tags as $tag) {
+                $qb->andWhere($qb->expr()->isMemberOf(':tag_'.$tag->getId(), 'd.tags'))
+                    ->setParameter('tag_'.$tag->getId(), $tag);
+            }
         }
 
         return $qb->getQuery()->execute();
