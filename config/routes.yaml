@@ -3,6 +3,10 @@ easy_admin_bundle:
     prefix: /admin
     type: annotation
 
+admin_dashboard:
+    path: /dashboard
+    defaults: { _controller: 'App\Controller\EasyAdmin\DashboardController::dashboard' }
+
 # Security
 login:
     path: /admin/login

@@ -1,0 +1,39 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+
+{% block main %}
+    Dashboard
+
+    <h1>Tags</h1>
+
+    {% include '/EasyAdmin/fragment/tagselection.html.twig' %}
+
+    <h1>Documents</h1>
+    <ul>
+        {% for document in documents %}
+            <li>
+                {{ document.name }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        var tags = 'input[name="search_tags[tags][]"]';
+
+        $('body').on('change', tags, function() {
+        // $(tags).change(function() {
+            var $form = $(this).closest('form');
+
+            var datas = $($form).serialize();
+
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : datas,
+                success: function(html) {
+                    $('.select-tags-container').replaceWith(html);
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

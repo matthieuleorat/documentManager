@@ -6,6 +6,11 @@ easy_admin:
                 - 'stylesheet/admin.css'
             js:
                 - 'js/admin/jscolor.min.js'
+        menu:
+            - { label: 'admin.menu.dashboard', route: 'admin_dashboard', default: true }
+            - { entity: 'Document' }
+            - { entity: 'Tag' }
+            - { entity: 'Folder' }
     entities:
         Folder:
             class: App\Entity\Folder

@@ -32,7 +32,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
  *          "download"={"route_name"="document_download"}
  *      }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\DocumentRepository")
  * @ORM\Table(name="document")
  * @ORM\HasLifecycleCallbacks()
  */
