@@ -28,7 +28,7 @@ class SearchTagsType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'query_builder' => function (TagRepository $repository) {
-                    return $repository->search();
+                    return $repository->getAvailableTags();
                 },
             ])
         ;
@@ -37,7 +37,7 @@ class SearchTagsType extends AbstractType
             $form->add('tags', EntityType::class, [
                 'class' => Tag::class,
                 'query_builder' => function (TagRepository $repository) use ($tags) {
-                    return $repository->search($tags);
+                    return $repository->getAvailableTags($tags);
                 },
                 'data' => $tags,
                 'multiple' => true,

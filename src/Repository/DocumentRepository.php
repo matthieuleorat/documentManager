@@ -40,9 +40,27 @@ class DocumentRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('d')
             ->where('d.user = :user')
-            //->innerJoin('d.tags','t')
             ->setParameter(':user', $this->user)
             ->orderBy('d.id', 'ASC');
+
+        if (false === empty($tags)) {
+            foreach ($tags as $tag) {
+                $qb->andWhere($qb->expr()->isMemberOf(':tag_'.$tag->getId(), 'd.tags'))
+                    ->setParameter('tag_'.$tag->getId(), $tag);
+            }
+        }
+
+        return $qb->getQuery()->execute();
+    }
+
+    public function getTagsIds($tags = [])
+    {
+        $qb = $this->createQueryBuilder('d')
+            ->select('tags.id')
+            ->where('d.user = :user')
+            ->innerJoin('d.tags','tags')
+            ->setParameter(':user', $this->user)
+            ->groupBy('tags.id');
 
         if (false === empty($tags)) {
             foreach ($tags as $tag) {

@@ -22,8 +22,6 @@ class DashboardController extends AdminController
      */
     public function dashboard(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
         $form = $this->createForm(SearchTagsType::class);
 
         $form->handleRequest($request);
@@ -34,6 +32,7 @@ class DashboardController extends AdminController
             $selectedTags = $form->get('tags')->getData();
         }
 
+        $em = $this->getDoctrine()->getManager();
         $documents = $em->getRepository(Document::class)->searchByTags($selectedTags);
 
         return $this->render('EasyAdmin\Dashboard\dashboard.html.twig', [

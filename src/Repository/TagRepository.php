@@ -8,11 +8,9 @@
 
 namespace App\Repository;
 
-use App\Entity\Document;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class TagRepository extends ServiceEntityRepository
 {
@@ -36,18 +34,9 @@ class TagRepository extends ServiceEntityRepository
      * @param Tag[] $tags
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function search(array $tags = [])
+    public function getAvailableTags(array $tags = [])
     {
-        /** @var Document[] $documents */
-        $documents = $this->documentRepository->searchByTags($tags);
-
-        $tagsId = [];
-
-        foreach ($documents as $document) {
-            foreach ($document->getTags() as $tag) {
-                $tagsId[$tag->getId()] = $tag->getId();
-            }
-        }
+        $tagsId = array_column($this->documentRepository->getTagsIds($tags), 'id');
 
         $qb = $this->createQueryBuilder('t')
             ->where('t.id in (:tags_id)')
