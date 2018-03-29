@@ -83,7 +83,6 @@ class Document implements UserableInterface
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $file;
 
