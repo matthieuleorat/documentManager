@@ -104,6 +104,9 @@ class Document implements UserableInterface
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;
