@@ -11,3 +11,5 @@ File: Fichier
 Description: Description
 Color: Couleur
 app.document.send.success: Le document %doc% a bien été envoyé
+Folder: Dossier
+admin.menu.dashboard: Tableau de bord
