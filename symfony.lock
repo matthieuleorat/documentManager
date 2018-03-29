@@ -113,6 +113,9 @@
             "ref": "7b6cbc842f8cd3d550815247d12294f6f304a8c4"
         }
     },
+    "nikic/php-parser": {
+        "version": "v4.0.1"
+    },
     "pagerfanta/pagerfanta": {
         "version": "v1.0.5"
     },
