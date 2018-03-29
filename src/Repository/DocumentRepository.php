@@ -39,6 +39,7 @@ class DocumentRepository extends ServiceEntityRepository
     public function searchByTags($tags = [])
     {
         $qb = $this->createQueryBuilder('d')
+            ->select('d.id, d.name')
             ->where('d.user = :user')
             ->setParameter(':user', $this->user)
             ->orderBy('d.id', 'ASC');
