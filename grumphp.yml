@@ -1,4 +1,10 @@
 parameters:
     git_dir: .
     bin_dir: vendor/bin
-    tasks: null
+    tasks:
+        composer: ~
+        phpcs: ~
+        phpcsfixer: ~
+        phpcsfixer2: ~
+        phpparser: ~
+        securitychecker: ~

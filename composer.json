@@ -23,6 +23,7 @@
     "require-dev": {
         "nikic/php-parser": "^4.0",
         "phpro/grumphp": "^0.14.0",
+        "sensiolabs/security-checker": "^4.1",
         "symfony/dotenv": "^4.0",
         "symfony/phpunit-bridge": "^4.0",
         "symfony/profiler-pack": "^1.0"
@@ -46,7 +47,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd",
+            "security-checker security:check": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"
