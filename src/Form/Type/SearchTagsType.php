@@ -27,6 +27,9 @@ class SearchTagsType extends AbstractType
                 'class' => Tag::class,
                 'multiple' => true,
                 'expanded' => true,
+                'query_builder' => function (TagRepository $repository) {
+                    return $repository->search();
+                },
             ])
         ;
 
@@ -46,7 +49,7 @@ class SearchTagsType extends AbstractType
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) use ($formModifier) {
                 $tags = $event->getForm()->getData();
-                $formModifier($event->getForm()->getParent(), $tags);
+                $formModifier($event->getForm()->getParent(), $tags->toArray());
             }
         );
     }

@@ -8,39 +8,41 @@
 
 namespace App\Repository;
 
-
 use App\Entity\Document;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class TagRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var DocumentRepository
+     */
+    private $documentRepository;
+
+    /**
+     * TagRepository constructor.
+     * @param RegistryInterface $registry
+     * @param DocumentRepository $documentRepository
+     */
+    public function __construct(RegistryInterface $registry, DocumentRepository $documentRepository)
     {
+        $this->documentRepository = $documentRepository;
         parent::__construct($registry, Tag::class);
     }
 
     /**
-     * @param Tags[]|ArrayCollection $tags
+     * @param Tag[] $tags
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function search($tags = [])
+    public function search(array $tags = [])
     {
-        $subQuery = $this->_em->createQueryBuilder()
-            ->select('d')
-            ->from(Document::class, 'd')
-            ->where('1 = 1');
-
-        foreach ($tags as $tag) {
-            $subQuery->andWhere($subQuery->expr()->isMemberOf(':tag_'.$tag->getId(), 'd.tags'))
-                ->setParameter('tag_'.$tag->getId(), $tag);
-        }
-
         /** @var Document[] $documents */
-        $documents = $subQuery->getQuery()->getResult();
+        $documents = $this->documentRepository->searchByTags($tags);
+
         $tagsId = [];
+
         foreach ($documents as $document) {
             foreach ($document->getTags() as $tag) {
                 $tagsId[$tag->getId()] = $tag->getId();

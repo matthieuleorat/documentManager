@@ -9,20 +9,39 @@
 namespace App\Repository;
 
 use App\Entity\Document;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class DocumentRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * DocumentRepository constructor.
+     * @param RegistryInterface $registry
+     * @param TokenStorageInterface $tokenStorage
+     */
+    public function __construct(RegistryInterface $registry, TokenStorageInterface $tokenStorage)
     {
+        $this->user = $tokenStorage->getToken()->getUser();
         parent::__construct($registry, Document::class);
     }
 
+    /**
+     * @param array $tags
+     * @return array
+     */
     public function searchByTags($tags = [])
     {
         $qb = $this->createQueryBuilder('d')
-            ->where('1 = 1')
+            ->where('d.user = :user')
+            //->innerJoin('d.tags','t')
+            ->setParameter(':user', $this->user)
             ->orderBy('d.id', 'ASC');
 
         if (false === empty($tags)) {

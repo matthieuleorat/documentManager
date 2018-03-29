@@ -67,7 +67,7 @@ class Document implements UserableInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"}, fetch="EAGER")
      * @ApiSubresource()
      * @Groups({"document_read"})
      */
