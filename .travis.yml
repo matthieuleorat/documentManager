@@ -7,9 +7,6 @@ env:
   global:
     - TARGET=test
     - APP_REPORT_ERROR_EMAIL='test@email.com'
-    - APP_ENV=prod
-    - APP_DEBUG=0
-    - APP_URL=http://localhost
 
 matrix:
   fast_finish: true
@@ -22,9 +19,7 @@ before_install:
   - if [[ -v $DEPENDENCIES ]]; then composer require --no-update $DEPENDENCIES; fi;
   - echo "memory_limit=2G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
-install:
-  - flags="--ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress --no-dev"
-  - travis_retry composer install $flags
+install: composer install --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
   - php bin/phpunit --coverage-clover=coverage.clover
