@@ -43,6 +43,8 @@ class TagRepository extends ServiceEntityRepository
             ->setParameter('tags_id', $tagsId);
         ;
 
+        $qb->orderBy('t.name','ASC');
+
         return $qb;
     }
 }
