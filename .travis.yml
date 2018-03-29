@@ -9,6 +9,7 @@ env:
     - APP_REPORT_ERROR_EMAIL='test@email.com'
     - APP_ENV=prod
     - APP_DEBUG=0
+    - APP_URL=http://localhost
 
 matrix:
   fast_finish: true
