@@ -99,6 +99,11 @@ class Document implements UserableInterface
      */
     private $fullThumbnailPath;
 
+    /**
+     * Document constructor.
+     *
+     * Init tags with an empty array collection
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
