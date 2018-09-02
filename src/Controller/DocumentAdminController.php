@@ -16,7 +16,6 @@ use App\Manager\DocumentManager;
 use Doctrine\ORM\EntityRepository;
 use App\Form\Type\SendDocumentToType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\HttpFoundation\Request;
 
 class DocumentAdminController extends AdminController
 {

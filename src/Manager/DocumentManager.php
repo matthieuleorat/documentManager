@@ -141,9 +141,11 @@ class DocumentManager
      */
     public function deleteThumbnail(Document $document)
     {
-        $thumbnail = $this->project_dir.$document->getThumbnail();
-
-        $this->fileManager->deleteFileByPath($thumbnail);
+        if (null !== $document->getThumbnail()) {
+            $thumbnail = $this->project_dir.$document->getThumbnail();
+    
+            $this->fileManager->deleteFileByPath($thumbnail);
+        }
     }
 
     public function constructFullThumbnailPath(Document $document)

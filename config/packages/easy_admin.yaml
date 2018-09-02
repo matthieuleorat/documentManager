@@ -34,7 +34,7 @@ easy_admin:
                     - { name: 'delete'}
                     - { name: 'send', icon: 'envelope ', label: '' }
                 fields:
-                    - { property: 'thumbnail', type: 'image' }
+                    - { property: 'thumbnail', template: 'EasyAdmin/Document/thumbnail.html.twig' }
                     - name
                     - { property: tags, template: 'EasyAdmin/Document/tags.html.twig' }
                     - { property: 'createdAt', format: 'd/m/Y h:i:s' }
@@ -42,8 +42,15 @@ easy_admin:
             form:
                 fields:
                     - name
-                    - tags
-                    - file
+                    -
+                        property: 'tags'
+                        type: 'collection'
+#                        type_options:
+#                            entry_type: App\Form\Type\DocumentTagsType
+#                            allow_add: true
+#                            allow_delete: true
+#                            by_reference: false
+                    - { property: file, type: file }
                     - description
         Tag:
             class: App\Entity\Tag
