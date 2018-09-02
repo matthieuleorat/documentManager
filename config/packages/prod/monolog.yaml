@@ -1,38 +1,6 @@
 monolog:
-    channels: [ 'document', 'tag', 'security' ]
     handlers:
-        main:
-            type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
+        nested:
+            type:  stream
+            path:  "php://stderr"
             level: debug
-            channels: ["!event"]
-        document:
-            type: rotating_file
-            level: info
-            path: "%kernel.logs_dir%/%kernel.environment%-document.log"
-            max_files: 10
-            channels: document
-        tag:
-            type: rotating_file
-            level: info
-            path: "%kernel.logs_dir%/%kernel.environment%-tag.log"
-            max_files: 10
-            channels: tag
-        security:
-            type: rotating_file
-            level: info
-            path: "%kernel.logs_dir%/%kernel.environment%-security.log"
-            max_files: 10
-            channels: security
-        # uncomment to get logging in your browser
-        # you may have to allow bigger header sizes in your Web server configuration
-        #firephp:
-        #    type: firephp
-        #    level: info
-        #chromephp:
-        #    type: chromephp
-        #    level: info
-        console:
-            type:   console
-            process_psr_3_messages: false
-            channels: ["!event", "!doctrine", "!console"]
