@@ -9,22 +9,22 @@ monolog:
         document:
             type: stream
             level: info
-            path: "%kernel.logs_dir%/%kernel.environment%-document.log"
+            path: "php://stderr"
             channels: document
         tag:
             type: stream
             level: info
-            path: "%kernel.logs_dir%/%kernel.environment%-tag.log"
+            path: "php://stderr"
             channels: tag
         security:
             type: stream
             level: info
-            path: "%kernel.logs_dir%/%kernel.environment%-security.log"
+            path: "php://stderr"
             channels: security
         exception:
             type: stream
             level: info
-            path: "%kernel.logs_dir%/%kernel.environment%-exception.log"
+            path: "php://stderr"
             channels: exception
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
