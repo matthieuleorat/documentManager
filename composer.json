@@ -59,6 +59,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "warmup": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
         ]
     },
     "conflict": {
