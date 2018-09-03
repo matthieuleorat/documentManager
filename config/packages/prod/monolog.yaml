@@ -1,6 +1,52 @@
 monolog:
+    channels: [ 'document', 'tag', 'security', 'exception' ]
     handlers:
-        nested:
-            type:  stream
-            path:  "php://stderr"
+        main:
+            type: stream
+            path: "php://stderr"
             level: debug
+            channels: ["!event"]
+        document:
+            type: stream
+            level: info
+            path: "%kernel.logs_dir%/%kernel.environment%-document.log"
+            channels: document
+        tag:
+            type: stream
+            level: info
+            path: "%kernel.logs_dir%/%kernel.environment%-tag.log"
+            channels: tag
+        security:
+            type: stream
+            level: info
+            path: "%kernel.logs_dir%/%kernel.environment%-security.log"
+            channels: security
+        exception:
+            type: stream
+            level: info
+            path: "%kernel.logs_dir%/%kernel.environment%-exception.log"
+            channels: exception
+        # uncomment to get logging in your browser
+        # you may have to allow bigger header sizes in your Web server configuration
+        #firephp:
+        #    type: firephp
+        #    level: info
+        #chromephp:
+        #    type: chromephp
+        #    level: info
+        console:
+            type:   console
+            process_psr_3_messages: false
+            channels: ["!event", "!doctrine", "!console"]
+        deduplicated:
+            type:    deduplication
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: "%env(APP_REPORT_ERROR_EMAIL)%"
+            to_email:   "%env(APP_REPORT_ERROR_EMAIL)%"
+            subject:    'An Error Occurred! %%message%%'
+            level:      error
+            formatter:  monolog.formatter.html
+            content_type: text/html
+
