@@ -44,7 +44,7 @@ easy_admin:
                     - name
                     -
                         property: 'tags'
-                        type: 'collection'
+                        #type: 'collection'
 #                        type_options:
 #                            entry_type: App\Form\Type\DocumentTagsType
 #                            allow_add: true
