@@ -17,6 +17,7 @@
         "symfony/lts": "^4.1@dev",
         "symfony/messenger": "^4.0@dev",
         "symfony/monolog-bundle": "^3.1",
+        "symfony/orm-pack": "^1.0",
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/twig-bundle": "^4.0",
         "symfony/yaml": "^4.0",
@@ -62,6 +63,9 @@
         ],
         "warmup": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+        ],
+        "compile": [
+            "php bin/console doctrine:migrations:migrate"
         ]
     },
     "conflict": {
