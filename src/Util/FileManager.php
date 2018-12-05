@@ -41,9 +41,11 @@ class FileManager
      */
     public function deleteFileByPath(string $path)
     {
-        $file = $this->createFileFormPath($path);
+        if (file_exists($path)) {
+            $file = $this->createFileFormPath($path);
 
-        $this->deleteFile($file);
+            $this->deleteFile($file);
+        }
     }
 
     /**

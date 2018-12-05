@@ -9,25 +9,25 @@ security:
                 class: App\Entity\User
                 property: username
     firewalls:
-        login:
-            pattern:  ^/api/login
-            stateless: true
-            anonymous: true
-            provider: db_provider
-            form_login:
-                check_path: /api/login_check
-                username_parameter: _username
-                password_parameter: _password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-                require_previous_session: false
-
-        main:
-            pattern:   ^/api
-            provider: db_provider
-            stateless: true
-            anonymous: true
-            lexik_jwt: ~
+#        login:
+#            pattern:  ^/api/login
+#            stateless: true
+#            anonymous: true
+#            provider: db_provider
+#            form_login:
+#                check_path: /api/login_check
+#                username_parameter: _username
+#                password_parameter: _password
+#                success_handler: lexik_jwt_authentication.handler.authentication_success
+#                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+#                require_previous_session: false
+#
+#        main:
+#            pattern:   ^/api
+#            provider: db_provider
+#            stateless: true
+#            anonymous: true
+#            lexik_jwt: ~
 
         admin:
             provider: db_provider # Use any declared provider above

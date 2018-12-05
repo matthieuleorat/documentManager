@@ -22,16 +22,17 @@ class DocumentSubscriber implements EventSubscriberInterface
     private $logger;
 
     /** @var User  */
-    private $user;
+    private $tokenStorage;
 
     /**
      * DocumentSubscriber constructor.
      * @param LoggerInterface $logger
+     * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(LoggerInterface $logger, TokenStorageInterface $tokenStorage)
     {
         $this->logger = $logger;
-        $this->user = $tokenStorage->getToken()->getUser();
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -51,6 +52,9 @@ class DocumentSubscriber implements EventSubscriberInterface
     {
         /** @var Document $document */
         $document = $event->getDocument();
-        $this->logger->info('download', ['document' => $document->getId(), 'user' => $this->user->getId()]);
+
+        $user = $this->tokenStorage->getToken() === null ? null : $this->tokenStorage->getToken()->getUser();
+
+        $this->logger->info('download', ['document' => $document->getId(), 'user' => $user->getId()]);
     }
 }

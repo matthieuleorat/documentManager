@@ -14,6 +14,7 @@ use App\Util\FileManager;
 use App\Util\Mailer;
 use App\Util\PdfThumbnailGenerator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class DocumentManager
@@ -103,7 +104,9 @@ class DocumentManager
     {
         $this->deleteThumbnail($document);
 
-        $this->fileManager->deleteFile($document->getFile());
+        if ($document->getFile() instanceof File){
+            $this->fileManager->deleteFile($document->getFile());
+        }
 
     }
 
@@ -130,7 +133,9 @@ class DocumentManager
         if (true === is_string($document->getFile())) {
             $filePath = $this->project_dir.$document->getpath().'/'.$document->getFile();
 
-            $document->setFile($this->fileManager->createFileFormPath($filePath));
+            if (false !== file_exists($filePath)) {
+                $document->setFile($this->fileManager->createFileFormPath($filePath));
+            }
         }
     }
 
